@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'orderly.',
-        short_name: 'orderly',
+        name: 'zerocart.',
+        short_name: 'zerocart',
         description: 'Shop the feeling, keep the cash. Pure dopamine, zero clutter.',
         theme_color: '#232f3e',
         background_color: '#f0f2f2',
