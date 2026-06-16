@@ -223,10 +223,10 @@ const CAT_COLORS = {
 };
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
-const USERS_KEY    = "orderly-users";
-const ORDERS_KEY   = "orderly-orders";
-const IMPULSE_KEY  = "orderly-impulse";
-const WISHLIST_KEY = "orderly-wishlist";
+const USERS_KEY    = "zerocart-users";
+const ORDERS_KEY   = "zerocart-orders";
+const IMPULSE_KEY  = "zerocart-impulse";
+const WISHLIST_KEY = "zerocart-wishlist";
 const loadJSON = (k, fb) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; } catch { return fb; } };
 const saveJSON = (k, v)  => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 
@@ -245,7 +245,7 @@ const buildReceiptText = (cart, userName) => {
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const tax = subtotal * 0.12;
   const items = cart.map(i => `  ${i.img} ${i.name} — ${fmtMoney(i.price * i.qty)}`).join("\n");
-  return `🧾 ORDERLY DOPAMINE RECEIPT\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n${userName ? `Shopper: ${userName}` : "Anonymous shopper"}\nDate: ${new Date().toLocaleDateString("en-CA", { month:"long", day:"numeric", year:"numeric" })}\n\nITEMS "ORDERED":\n${items}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nSubtotal:       ${fmtMoney(subtotal)}\nTax (GST+PST):  ${fmtMoney(tax)}\nTOTAL FAKE:     ${fmtMoney(subtotal + tax)}\nREAL COST:      $0.00\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nNothing shipped. No boxes coming.\nJust the good feeling — for free.\n\norderly. — shop the feeling, keep the cash`;
+  return `🧾 ZEROCART DOPAMINE RECEIPT\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n${userName ? `Shopper: ${userName}` : "Anonymous shopper"}\nDate: ${new Date().toLocaleDateString("en-CA", { month:"long", day:"numeric", year:"numeric" })}\n\nITEMS "ORDERED":\n${items}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nSubtotal:       ${fmtMoney(subtotal)}\nTax (GST+PST):  ${fmtMoney(tax)}\nTOTAL FAKE:     ${fmtMoney(subtotal + tax)}\nREAL COST:      $0.00\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nNothing shipped. No boxes coming.\nJust the good feeling — for free.\n\nzerocart. — shop the feeling, keep the cash`;
 };
 
 // ── STARS ─────────────────────────────────────────────────────────────────────
@@ -278,7 +278,7 @@ function SavingsBanner({ userId }) {
       <div style={{ fontSize:32, flexShrink:0 }}>💰</div>
       <div style={{ flex:1 }}>
         <div style={{ color:"#ffd814", fontWeight:800, fontSize:18 }}>{fmtMoney(totalSaved)} saved</div>
-        <div style={{ color:"#aaa", fontSize:12, marginTop:2 }}>across {sessionCount} orderly session{sessionCount>1?"s":""} — real money still in your pocket</div>
+        <div style={{ color:"#aaa", fontSize:12, marginTop:2 }}>across {sessionCount} zerocart session{sessionCount>1?"s":""} — real money still in your pocket</div>
       </div>
       <div style={{ background:"rgba(255,255,255,0.08)", borderRadius:8, padding:"8px 12px", textAlign:"center", flexShrink:0 }}>
         <div style={{ color:"#fff", fontWeight:700, fontSize:14 }}>{sessionCount}</div>
@@ -373,7 +373,7 @@ function ImpulseCheckModal({ cart, onGood, onSaveWishlist, onKeepShopping }) {
       <div style={{ background:"#fff", borderRadius:18, width:"100%", maxWidth:360, boxShadow:"0 16px 48px rgba(0,0,0,0.3)", overflow:"hidden" }}>
         <div style={{ background:"#232f3e", padding:"20px 22px 16px" }}>
           <div style={{ color:"#ff9900", fontWeight:900, fontSize:16, letterSpacing:-0.5, marginBottom:8 }}>
-            orderly<span style={{ color:"#fff" }}>.</span>
+            zerocart<span style={{ color:"#fff" }}>.</span>
           </div>
           <div style={{ color:"#fff", fontSize:19, fontWeight:800, lineHeight:1.3 }}>
             Wait — do you actually<br />want {itemCount === 1 ? "this" : "these"}?
@@ -408,7 +408,7 @@ function ImpulseCheckModal({ cart, onGood, onSaveWishlist, onKeepShopping }) {
           </button>
         </div>
         <div style={{ textAlign:"center", paddingBottom:16, fontSize:11, color:"#bbb" }}>
-          Most orderly shoppers choose "I'm good" 💛
+          Most zerocart shoppers choose "I'm good" 💛
         </div>
       </div>
     </div>
@@ -507,12 +507,12 @@ function ReceiptModal({ cart, user, onClose }) {
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const tax = subtotal * 0.12;
   const copy = () => { navigator.clipboard.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }); };
-  const share = () => { if (navigator.share) { navigator.share({ title:"My Orderly Dopamine Receipt", text }).catch(()=>{}); } else { copy(); } };
+  const share = () => { if (navigator.share) { navigator.share({ title:"My ZeroCart Dopamine Receipt", text }).catch(()=>{}); } else { copy(); } };
   return (
     <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.6)", zIndex:300, display:"flex", alignItems:"center", justifyContent:"center", padding:16 }}>
       <div style={{ background:"#fff", borderRadius:14, width:"100%", maxWidth:380, boxShadow:"0 12px 40px rgba(0,0,0,0.25)", overflow:"hidden" }}>
         <div style={{ background:"#232f3e", padding:"16px 20px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
-          <div style={{ color:"#ff9900", fontWeight:900, fontSize:18, letterSpacing:-1 }}>orderly<span style={{ color:"#fff" }}>.</span></div>
+          <div style={{ color:"#ff9900", fontWeight:900, fontSize:18, letterSpacing:-1 }}>zerocart<span style={{ color:"#fff" }}>.</span></div>
           <button onClick={onClose} style={{ background:"none", border:"none", color:"#aaa", fontSize:22, cursor:"pointer" }}>×</button>
         </div>
         <div style={{ padding:"20px 22px", fontFamily:"monospace", fontSize:12, lineHeight:1.7, background:"#fffdf5", borderBottom:"2px dashed #e0d9c8" }}>
@@ -619,9 +619,9 @@ function WishlistPage({ user, onBack }) {
     if (wishlist.length === 0) return "";
     const lines = wishlist.map(i => {
       const q = encodeURIComponent(i.name);
-      return `${i.img} ${i.name} — ${fmtMoney(i.price)}\n   Amazon: https://www.amazon.com/s?k=${q}&tag=orderly-20`;
+      return `${i.img} ${i.name} — ${fmtMoney(i.price)}\n   Amazon: https://www.amazon.com/s?k=${q}&tag=zerocart-20`;
     });
-    return `✨ My Orderly Wishlist\nSaved on ${new Date().toLocaleDateString("en-CA", { month:"long", day:"numeric", year:"numeric" })}\n\n${lines.join("\n\n")}\n\n━━━━━━━━━━━━━━━━━━━━\nTotal if purchased: ${fmtMoney(totalValue)}\n\nThese are things I actually want — not impulse buys.\nGenerated by orderly. — shop the feeling, keep the cash`;
+    return `✨ My ZeroCart Wishlist\nSaved on ${new Date().toLocaleDateString("en-CA", { month:"long", day:"numeric", year:"numeric" })}\n\n${lines.join("\n\n")}\n\n━━━━━━━━━━━━━━━━━━━━\nTotal if purchased: ${fmtMoney(totalValue)}\n\nThese are things I actually want — not impulse buys.\nGenerated by zerocart. — shop the feeling, keep the cash`;
   };
 
   const copyList = () => {
@@ -634,7 +634,7 @@ function WishlistPage({ user, onBack }) {
   const shareList = () => {
     const text = exportText();
     if (navigator.share) {
-      navigator.share({ title: "My Orderly Wishlist", text }).catch(() => {});
+      navigator.share({ title: "My ZeroCart Wishlist", text }).catch(() => {});
     } else {
       copyList();
     }
@@ -645,7 +645,7 @@ function WishlistPage({ user, onBack }) {
     const blob = new Blob([text], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "my-orderly-wishlist.txt"; a.click();
+    a.href = url; a.download = "my-zerocart-wishlist.txt"; a.click();
     URL.revokeObjectURL(url);
   };
 
@@ -688,7 +688,7 @@ function WishlistPage({ user, onBack }) {
           <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
             {wishlist.map(item => {
               const q = encodeURIComponent(item.name);
-              const amazonUrl = `https://www.amazon.com/s?k=${q}&tag=orderly-20`;
+              const amazonUrl = `https://www.amazon.com/s?k=${q}&tag=zerocart-20`;
               return (
                 <div key={item.id} style={{ background:"#fff", border:"1px solid #eee", borderRadius:12, padding:14, display:"flex", gap:12, alignItems:"center" }}>
                   <div style={{ fontSize:32, flexShrink:0 }}>{item.img}</div>
@@ -835,7 +835,7 @@ function BrandDashboard({ onClose }) {
       <div style={{ background:"#fff", borderRadius:14, width:"100%", maxWidth:740, boxShadow:"0 12px 40px rgba(0,0,0,0.25)", overflow:"hidden" }}>
         <div style={{ background:"#1a1f36", padding:"16px 20px", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <div>
-            <div style={{ color:"#a0aec0", fontSize:10, letterSpacing:2, textTransform:"uppercase" }}>Orderly · For Brands</div>
+            <div style={{ color:"#a0aec0", fontSize:10, letterSpacing:2, textTransform:"uppercase" }}>ZeroCart · For Brands</div>
             <div style={{ color:"#fff", fontSize:18, fontWeight:800, marginTop:2 }}>Purchase Intent Dashboard</div>
             <div style={{ color:"#a0aec0", fontSize:11, marginTop:2 }}>Opt-in panelist data only · No personal information</div>
           </div>
@@ -961,7 +961,7 @@ function AuthModal({ onAuth, onClose }) {
       <div style={{ background:"#fff", borderRadius:14, padding:24, width:"100%", maxWidth:360, boxShadow:"0 8px 32px rgba(0,0,0,0.2)", position:"relative" }}>
         <button onClick={onClose} style={{ position:"absolute", top:12, right:14, background:"none", border:"none", fontSize:22, cursor:"pointer", color:"#aaa" }}>×</button>
         <div style={{ textAlign:"center", marginBottom:18 }}>
-          <div style={{ fontSize:22, fontWeight:900, color:"#ff9900", letterSpacing:-1 }}>orderly<span style={{ color:"#232f3e" }}>.</span></div>
+          <div style={{ fontSize:22, fontWeight:900, color:"#ff9900", letterSpacing:-1 }}>zerocart<span style={{ color:"#232f3e" }}>.</span></div>
           <div style={{ fontSize:17, fontWeight:700, marginTop:5 }}>{mode==="login" ? "Sign in" : "Create account"}</div>
         </div>
         {error && <div style={{ background:"#fff3cd", border:"1px solid #ffc107", borderRadius:6, padding:"8px 12px", fontSize:12, marginBottom:10, color:"#856404" }}>{error}</div>}
@@ -1077,7 +1077,7 @@ export default function App() {
       <div style={{ background:"#232f3e", position:"sticky", top:0, zIndex:50 }}>
         <div style={{ display:"flex", alignItems:"center", gap:10, height:52, maxWidth:1200, margin:"0 auto", padding:"0 12px" }}>
           <div onClick={reset} style={{ color:"#ff9900", fontWeight:900, fontSize:20, cursor:"pointer", letterSpacing:-1, flexShrink:0 }}>
-            orderly<span style={{ color:"#fff" }}>.</span>
+            zerocart<span style={{ color:"#fff" }}>.</span>
           </div>
           {view==="browse" && (
             <div style={{ flex:1, display:"flex", maxWidth:500 }}>
@@ -1121,7 +1121,7 @@ export default function App() {
         <div style={{ maxWidth:1200, margin:"0 auto", padding:"16px 12px" }}>
           {user && <SavingsBanner userId={user.id} />}
           <div style={{ background:"#fff3cd", border:"1px solid #ffc107", borderRadius:8, padding:"9px 14px", marginBottom:14, fontSize:12, color:"#856404" }}>
-            ✨ <strong>Orderly</strong> — {filtered.length} product{filtered.length!==1?"s":""} {category!=="All"?`in ${category}`:"across 16 departments"}. Shop freely. Nothing ships. Pure dopamine, zero clutter.
+            ✨ <strong>ZeroCart</strong> — {filtered.length} product{filtered.length!==1?"s":""} {category!=="All"?`in ${category}`:"across 16 departments"}. Shop freely. Nothing ships. Pure dopamine, zero clutter.
             {!user && <> · <span onClick={() => setShowAuth(true)} style={{ cursor:"pointer", textDecoration:"underline" }}>Sign in</span> to track your savings.</>}
           </div>
           {filtered.length===0
