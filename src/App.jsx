@@ -9,7 +9,23 @@ const CAT_COLORS = {
   "Pet Supplies":"#fd79a8", "Toys & Games":"#fdcb6e", Automotive:"#636e72",
   Tools:"#b2bec3", Baby:"#a29bfe", "Food & Grocery":"#00cec9", Health:"#55efc4", Travel:"#74b9ff"
 };
+const GOOGLE_API_KEY = "AIzaSyBhlcjc6omUWTofh0d117OxPz4W0vYsSK0";
+const GOOGLE_CX      = "f6981a1ebe1b0453b";
+const imgCache       = {};
 
+function useProductImage(productName) {
+  const [src, setSrc] = useState(null);
+  useEffect(() => {
+    if (imgCache[productName]) { setSrc(imgCache[productName]); return; }
+    const query = encodeURIComponent(productName + " product photo");
+    const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${query}&searchType=image&num=1&imgSize=medium&safe=active`;
+    fetch(url).then(r => r.json()).then(data => {
+      const link = data?.items?.[0]?.link;
+      if (link) { imgCache[productName] = link; setSrc(link); }
+    }).catch(() => {});
+  }, [productName]);
+  return src;
+}
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 const USERS_KEY    = "zerocart-users";
 const ORDERS_KEY   = "zerocart-orders";
