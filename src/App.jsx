@@ -95,7 +95,7 @@ function ProductCard({ product, onAdd, onWishlist, wishlisted }) {
         {wishlisted ? "♥" : "♡"}
       </button>
       <div style={{ position:"absolute", top:32, right:9, background:catColor, color:"#fff", fontSize:9, fontWeight:700, padding:"2px 6px", borderRadius:3, opacity:0.85 }}>{product.category}</div>
-      <div style={{ fontSize:40, textAlign:"center", marginTop: product.tag ? 16 : 8 }}>{product.img}</div>
+      <img src={product.img} alt={product.name} style={{ width:"100%", height:140, objectFit:"cover", borderRadius:6, marginTop: product.tag ? 16 : 8 }} />
       <div style={{ fontSize:12, color:"#0f1111", fontWeight:500, lineHeight:1.35 }}>{product.name}</div>
       <Stars rating={product.rating} />
       <div style={{ fontSize:11, color:"#888" }}>{product.reviews.toLocaleString()} reviews</div>
