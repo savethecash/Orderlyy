@@ -479,7 +479,7 @@ function WishlistPage({ user, onBack }) {
               const amazonUrl = `https://www.amazon.com/s?k=${q}&tag=zerocart-20`;
               return (
                 <div key={item.id} style={{ background:"#fff", border:"1px solid #eee", borderRadius:12, padding:14, display:"flex", gap:12, alignItems:"center" }}>
-                  <div style={{ fontSize:32, flexShrink:0 }}>{item.img}</div>
+                  <img src={item.img} alt={item.name} style={{ width:56, height:56, objectFit:"cover", borderRadius:8, flexShrink:0 }} />
                   <div style={{ flex:1, minWidth:0 }}>
                     <div style={{ fontSize:13, fontWeight:600, lineHeight:1.3, marginBottom:4 }}>{item.name}</div>
                     <div style={{ display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
