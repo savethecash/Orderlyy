@@ -126,7 +126,7 @@ function CartSidebar({ cart, onRemove, onClose, onCheckout }) {
         {cart.length===0 && <div style={{ color:"#bbb", textAlign:"center", marginTop:60, fontSize:14 }}>Your cart is empty</div>}
         {cart.map(item => (
           <div key={item.id} style={{ display:"flex", gap:10, borderBottom:"1px solid #f0f0f0", paddingBottom:10 }}>
-            <div style={{ fontSize:30, flexShrink:0 }}>{item.img}</div>
+           <img src={item.img} alt={item.name} style={{ width:48, height:48, objectFit:"cover", borderRadius:6, flexShrink:0 }} />
             <div style={{ flex:1 }}>
               <div style={{ fontSize:12, fontWeight:500, lineHeight:1.3 }}>{item.name}</div>
               <div style={{ display:"flex", justifyContent:"space-between", marginTop:5 }}>
