@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PRODUCTS } from "./data/products.js";
 const CATEGORIES = ["All", ...new Set(PRODUCTS.map(p => p.category))];
 const TRACKING_STEPS = ["Order Placed","Payment Confirmed","Preparing Your Order","Picked Up by Carrier","In Transit","Out for Delivery","Delivered!"];
