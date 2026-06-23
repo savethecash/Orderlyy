@@ -168,7 +168,7 @@ function ImpulseCheckModal({ cart, onGood, onSaveWishlist, onKeepShopping }) {
           </div>
         </div>
         <div style={{ background:"#fafafa", borderBottom:"1px solid #eee", padding:"14px 22px", display:"flex", alignItems:"center", gap:14 }}>
-          <div style={{ fontSize:36, flexShrink:0 }}>{hero?.img}</div>
+          <img src={hero?.img} alt={hero?.name} style={{ width:56, height:56, objectFit:"cover", borderRadius:8, flexShrink:0 }} />
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ fontSize:12, color:"#0f1111", fontWeight:600, lineHeight:1.35, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
               {itemCount > 1 ? `${itemCount} items in cart` : hero?.name}
