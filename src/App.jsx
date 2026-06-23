@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PRODUCTS } from "./data/products.js";
 const CATEGORIES = ["All", ...new Set(PRODUCTS.map(p => p.category))];
 const TRACKING_STEPS = ["Order Placed","Payment Confirmed","Preparing Your Order","Picked Up by Carrier","In Transit","Out for Delivery","Delivered!"];
 const AGE_BRACKETS = ["18-24","25-34","35-44","45-54","55+"];
