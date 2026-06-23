@@ -95,6 +95,7 @@ function SavingsBanner({ userId }) {
 // ── PRODUCT CARD ──────────────────────────────────────────────────────────────
 function ProductCard({ product, onAdd, onWishlist, wishlisted }) {
   const [flash, setFlash] = useState(false);
+  const imgSrc = useProductImage(product.name);
   const add = () => { onAdd(product); setFlash(true); setTimeout(() => setFlash(false), 900); };
   const catColor = CAT_COLORS[product.category] || "#888";
   return (
